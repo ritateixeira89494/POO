@@ -129,7 +129,7 @@ public class Loja
         this.existeEncomenda = true;
     }
 
-    public void concluiuencomenda()
+    public void concluiuEncomenda()
     {
         this.existeEncomenda = false;
     }

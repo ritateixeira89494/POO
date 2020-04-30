@@ -15,7 +15,7 @@ public class LinhaEncomenda
         setEncomendas(encomendas); // de modo a permitir o encapsulamento de dados
     }
 
-    public LinhaEncomenda(Encomenda encomenda)
+    public LinhaEncomenda(LinhaEncomenda encomenda)
     {
         setEncomendas(encomenda.getEncomendas());
     }
