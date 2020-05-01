@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Voluntarios
+public class Voluntarios extends Main
 {
     private List<Voluntario> voluntarios;
 

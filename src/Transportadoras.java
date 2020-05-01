@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
 
-public class Transportadoras
+public class Transportadoras extends Main
 {
     private List<Transportadora> transportadoras;
 

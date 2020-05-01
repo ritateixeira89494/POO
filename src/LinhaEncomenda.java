@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
 
-public class LinhaEncomenda
+public class LinhaEncomenda extends Main
 {
     private List<Encomenda> encomendas;
 

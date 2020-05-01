@@ -1,4 +1,4 @@
-public class Sistema {
+public class Sistema extends Main{
     private String username;
     private String password;
 

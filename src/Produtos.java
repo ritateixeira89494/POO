@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
 
-public class Produtos
+public class Produtos extends Main
 {
     private List<Produto> produtos;
 

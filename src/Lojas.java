@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
 
-public class Lojas
+public class Lojas extends Main
 {
     private List<Loja> lojas;
 
