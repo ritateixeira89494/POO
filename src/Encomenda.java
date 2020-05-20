@@ -3,7 +3,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Encomenda
+public class Encomenda extends Lojas
 {
     private String vendedor;
     private String comprador;
@@ -96,4 +96,5 @@ public class Encomenda
     {
         return new Encomenda(this);
     }
+
 }

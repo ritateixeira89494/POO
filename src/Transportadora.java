@@ -1,11 +1,11 @@
 import java.time.LocalDateTime;
+import java.io.Serializable;
 
 public class Transportadora
 {
     private String codigo;
     private String nome;
-    private double latitude;
-    private double longitude;
+    private Ponto coordsT;
     private String nif;
     private double raio;
     private double preco;
@@ -18,8 +18,7 @@ public class Transportadora
     {
         this.codigo= new String();
         this.nome = new String();
-        this.latitude = 0;
-        this.longitude = 0;
+        this.coordsT = new Ponto();
         this.nif = new String();
         this.raio = 0;
         this.preco = 0;
@@ -32,8 +31,7 @@ public class Transportadora
     {
         this.codigo= codi;
         this.nome = nome;
-        this.latitude = latitude;
-        this.longitude = longitude;
+        this.coordsT = new Ponto(latitude,longitude);
         this.nif = nif;
         this.raio = raio;
         this.preco = preco;
@@ -46,8 +44,7 @@ public class Transportadora
     {
         this.codigo= trans.getCodigo();
         this.nome = trans.getNome();
-        this.latitude = trans.getLatitude();
-        this.longitude = trans.getLongitude();
+        this.coordsT = new Ponto(trans.getCoords().getX(),trans.getCoords().getY());
         this.nif = trans.getNif();
         this.raio = trans.getRaio();
         this.preco = trans.getPreco();
@@ -80,14 +77,12 @@ public class Transportadora
         return this.nif;
     }
 
-    public double getLatitude()
-    {
-        return this.latitude;
+    public Ponto getCoords() {
+        return coordsT;
     }
 
-    public double getLongitude()
-    {
-        return this.longitude;
+    public void setCoords(Ponto coordsT) {
+        this.coordsT = coordsT;
     }
 
     public double getRaio()

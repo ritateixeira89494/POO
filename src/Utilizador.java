@@ -1,32 +1,39 @@
-public class Utilizador {
+import java.io.Serializable;
+
+public class Utilizador implements Serializable {
 
     private String nickname;
     private String nome;
-    private double longitude;
-    private double latitude;
+    private Ponto coordsU;
 
     public Utilizador()
     {
         this.nickname = new String();
         this.nome = new String();
-        this.latitude = 0;
-        this.longitude = 0;
+        this.coordsU = new Ponto();
     }
 
     public Utilizador( String nickname, String nome, double latitude, double longitude)
     {
         this.nickname = nickname;
         this.nome = nome;
-        this.longitude = longitude;
-        this.latitude = latitude;
+        this.coordsU = new Ponto(latitude,longitude);
     }
 
     public Utilizador ( Utilizador uti)
     {
         this.nickname = uti.getNickname();
         this.nome = uti.getNome();
-        this.latitude = uti.getLatitude();
-        this.longitude = uti.getLongitude();
+        this.coordsU = new Ponto(uti.getCoords().getX(),uti.getCoords().getY());
+    }
+
+    /** Getter das coordenadas. */
+    public Ponto getCoords() {
+        return coordsU;
+    }
+    /** Setter das coordenadas. */
+    public void setCoords(Ponto coordsU) {
+        this.coordsU = coordsU;
     }
 
     public String getNickname()
@@ -38,24 +45,8 @@ public class Utilizador {
         return this.nome;
     }
 
-    public double getLatitude() {
-        return this.latitude;
-    }
-
-    public double getLongitude() {
-        return this.longitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
     }
 
     public void setNickname(String nickname) {

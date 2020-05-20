@@ -1,17 +1,16 @@
 import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
+import java.io.Serializable;
 
-
-public class Loja
+public class Loja implements Serializable
 {
     private String nome;
     private List<Produtos> produtos;
     private LocalDateTime tempoEspera;
     private LocalDateTime tempoProcessamento;
     private int pessoasEspera;
-    private double latitude;
-    private double longitude;
+    private Ponto coordsL;
     private boolean existeEncomenda;
     private int encomendasConcluidas;
 
@@ -22,8 +21,7 @@ public class Loja
         this.tempoEspera = LocalDateTime.now();
         this.tempoProcessamento = LocalDateTime.now();
         this.pessoasEspera = 0;
-        this.latitude = 0;
-        this.longitude = 0;
+        this.coordsL = new Ponto();
         this.existeEncomenda = false;
         this.encomendasConcluidas = 0;
     }
@@ -35,8 +33,7 @@ public class Loja
         this.tempoEspera = tempoEspera;
         this.tempoProcessamento = tempoProcessamento;
         this.pessoasEspera = pessoasEspera;
-        this.latitude = latitude;
-        this.longitude = longitude;
+        this.coordsL = new Ponto(latitude,longitude);
         this.existeEncomenda = bool;
         this.encomendasConcluidas = nmr;
     }
@@ -48,8 +45,7 @@ public class Loja
         this.tempoEspera = loja.getTempoEspera();
         this.tempoProcessamento = loja.getTempo();
         this.pessoasEspera = loja.getPessoas();
-        this.latitude = loja.getLatitude();
-        this.longitude = loja.getLongitude();
+        this.coordsL = new Ponto(loja.getCoords().getX(),loja.getCoords().getY());
         this.existeEncomenda = loja.getExisteEncomenda();
         this.encomendasConcluidas = loja.getEncomendas();
     }
@@ -84,14 +80,13 @@ public class Loja
         return this.nome;
     }
 
-    public double getLatitude()
-    {
-        return this.latitude;
+    /** Getter das coordenadas. */
+    public Ponto getCoords() {
+        return coordsL;
     }
-
-    public double getLongitude()
-    {
-        return this.longitude;
+    /** Setter das coordenadas. */
+    public void setCoords(Ponto coordsL) {
+        this.coordsL = coordsL;
     }
 
     public int getPessoas()
