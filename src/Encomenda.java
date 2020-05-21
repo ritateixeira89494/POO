@@ -1,7 +1,6 @@
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Encomenda
 {
@@ -10,7 +9,7 @@ public class Encomenda
     private String cod;
     private double peso;
     private double preco;
-    private List<Produtos> produtos;
+    private Map<String,LinhaEncomenda> produtos;
     private double kms;
     private LocalDateTime time;
     private boolean aceite;
@@ -23,13 +22,14 @@ public class Encomenda
         this.cod = new String();
         this.peso = 0;
         this.preco = 0;
-        this.produtos = new ArrayList<>();
+        this.produtos = new HashMap<>();
         this.kms = 0;
         this.time = LocalDateTime.now();
         this.aceite = false;
+
     }
 
-    public Encomenda(String vendedor, String comprador, String cod, double peso, double preco , List<Produtos> produtos,double kms, LocalDateTime time, boolean bool)
+    public Encomenda(String vendedor, String comprador, String cod, double peso, double preco , Map<String,LinhaEncomenda> produtos,double kms, LocalDateTime time, boolean bool)
     {
         this.vendedor = vendedor;
         this.comprador = comprador;
@@ -40,6 +40,19 @@ public class Encomenda
         this.kms = kms;
         this.time = time;
         this.aceite = bool;
+
+    }
+    public Encomenda(String vendedor, String comprador, String cod, double preco , Map<String,LinhaEncomenda> produtos)
+    {
+        this.vendedor = vendedor;
+        this.comprador = comprador;
+        this.cod = cod;
+        this.preco = preco;
+        setProdutos(produtos);
+        this.kms = 0; // temos que fazer uma funcao que calcula a distancia para aqui
+        this.time = LocalDateTime.now();
+        this.aceite = false;
+
     }
 
     Encomenda (Encomenda enc)
@@ -52,21 +65,20 @@ public class Encomenda
         setProdutos(enc.getProdutos());
         this.kms = enc.getKms();
         this.time = enc.getTime();
-        this.aceite = enc.getEstado();
+        this.aceite = enc.getAceite();
+
     }
 
-    public void setProdutos(List<Produtos> produtos) //construtor por copia
-    {
-        this.produtos= new ArrayList<>();
-        for (Produtos produtoss: produtos)
-            this.produtos.add(produtoss.clone());
+    public void setProdutos(Map<String,LinhaEncomenda> produtos) {
+        this.produtos = new HashMap<>();
+        this.produtos.entrySet().forEach(e -> this.produtos.put(e.getKey()
+                , e.getValue()).clone());
     }
 
-    public List<Produtos> getProdutos()
-    {
-        List<Produtos> aux = new ArrayList<>(); // temos de criar uma copia por causa do encapsulamento
-        for (Produtos produtos: this.produtos)
-            aux.add(produtos.clone());
+    public Map<String, LinhaEncomenda> getProdutos() {
+        Map<String,LinhaEncomenda> aux = new HashMap<>();
+        for (Map.Entry<String,LinhaEncomenda> e : this.produtos.entrySet())
+            aux.put(e.getKey(), e.getValue().clone());
         return aux;
     }
 
@@ -77,6 +89,13 @@ public class Encomenda
 
     public String getCodigo() {
         return this.cod;
+    }
+
+    public boolean getAceite() {return this.aceite;}
+
+    public void setAceite(boolean bool)
+    {
+        this.aceite = bool;
     }
 
     public String getVendedor()
@@ -94,16 +113,6 @@ public class Encomenda
         return this.peso;
     }
 
-    public boolean getEstado()
-    {
-        return this.aceite;
-    }
-
-    public void setAceite(Boolean bool)
-    {
-        this.aceite = bool;
-    }
-
     public double getPreco()
     {
         return this.preco;
@@ -112,6 +121,12 @@ public class Encomenda
     public double getKms()
     {
         return this.kms;
+    }
+
+    public String toString()
+    {
+        return  "Aceite" + this.aceite;
+
     }
 
     public Encomenda clone()

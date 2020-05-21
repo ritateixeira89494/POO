@@ -8,7 +8,7 @@ public class Loja implements Serializable
 {
     private String nome;
     private String cod;
-    private List<Produtos> produtos;
+    private List<LinhaEncomenda> produtos;
     private LocalDateTime tempoEspera;
     private LocalDateTime tempoProcessamento;
     private int pessoasEspera;
@@ -29,7 +29,7 @@ public class Loja implements Serializable
         this.encomendasConcluidas = 0;
     }
 
-    public Loja(String nome,String cod, List<Produtos> produtos, LocalDateTime tempoEspera, LocalDateTime tempoProcessamento, int pessoasEspera, double latitude, double longitude, boolean bool, int nmr)
+    public Loja(String nome,String cod, List<LinhaEncomenda> produtos, LocalDateTime tempoEspera, LocalDateTime tempoProcessamento, int pessoasEspera, double latitude, double longitude, boolean bool, int nmr)
     {
         this.nome = nome;
         this.cod = cod;
@@ -69,17 +69,17 @@ public class Loja implements Serializable
         this.encomendasConcluidas = loja.getEncomendas();
     }
 
-    public void setProdutos(List<Produtos> produtos) //construtor por copia
+    public void setProdutos(List<LinhaEncomenda> produtos) //construtor por copia
     {
         this.produtos = new ArrayList<>();
-        for (Produtos prod : produtos)
+        for (LinhaEncomenda prod : produtos)
             this.produtos.add(prod.clone());
     }
 
-    public List<Produtos> getProdutos()
+    public List<LinhaEncomenda> getProdutos()
     {
-        List<Produtos> aux = new ArrayList<>(); // temos de criar uma copia por causa do encapsulamento
-        for (Produtos prod : this.produtos)
+        List<LinhaEncomenda> aux = new ArrayList<>(); // temos de criar uma copia por causa do encapsulamento
+        for (LinhaEncomenda prod : this.produtos)
             aux.add(prod.clone());
         return aux;
     }

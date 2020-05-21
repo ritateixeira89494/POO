@@ -1,50 +1,64 @@
-import java.util.List;
-import java.util.ArrayList;
-
-public class LinhaEncomenda extends Main
+public class LinhaEncomenda
 {
-    private List<Encomenda> encomendas;
+    private String codigo;
+    private String nome;
+    private double quantidade;
+    private double preco;
 
-    LinhaEncomenda ()
+
+    public LinhaEncomenda()
     {
-        this.encomendas= new ArrayList<>();
+        this.nome = new String();
+        this.codigo = new String();
+        this.quantidade = 0;
+        this.preco = 0;
     }
 
-    public LinhaEncomenda(List<Encomenda> encomendas) // construtor parametrizado
+    public LinhaEncomenda (String nome, String codigo, double quantidade, double preco)
     {
-        setEncomendas(encomendas); // de modo a permitir o encapsulamento de dados
+        this.nome = nome;
+        this.codigo = codigo;
+        this.quantidade = quantidade ;
+        this.preco = preco;
     }
 
-    public LinhaEncomenda(LinhaEncomenda encomenda)
+    public LinhaEncomenda (LinhaEncomenda pd)
     {
-        setEncomendas(encomenda.getEncomendas());
+        this.nome = pd.getNome();
+        this.codigo = pd.getCodigo();
+        this.quantidade = pd.getQuantidade();
+        this.preco = pd.getPreco();
     }
 
-    public void setEncomendas(List<Encomenda> encomendas) //construtor por copia
+    public String getNome()
     {
-        this.encomendas= new ArrayList<>();
-        for (Encomenda encomenda: encomendas)
-            this.encomendas.add(encomenda.clone());
+        return this.nome;
     }
 
-    public List<Encomenda> getEncomendas()
+    public String getCodigo()
     {
-        List<Encomenda> aux = new ArrayList<>(); // temos de criar uma copia por causa do encapsulamento
-        for (Encomenda encomenda: this.encomendas)
-            aux.add(encomenda.clone());
-        return aux;
+        return this.codigo;
     }
 
-    public void adicionaEncomendas(Encomenda encomenda)
+    public double getQuantidade()
     {
-        this.encomendas.add(encomenda);
+        return this.quantidade;
     }
 
+    public double getPreco()
+    {
+        return this.preco;
+    }
 
     public LinhaEncomenda clone()
     {
         return new LinhaEncomenda(this);
     }
+
+    public String toString()
+    {
+        return   this.codigo+ ","
+                +  " Nome: " + this.nome +" " + ","
+                + this.preco + + this.quantidade + "\n";
+    }
 }
-
-

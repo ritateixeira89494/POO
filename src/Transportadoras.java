@@ -1,16 +1,15 @@
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
-public class Transportadoras extends Main
+public class Transportadoras
 {
-    private List<Transportadora> transportadoras;
+    private Map<String,Transportadora> transportadoras;
 
     Transportadoras ()
     {
-        this.transportadoras = new ArrayList<>();
+        this.transportadoras = new HashMap<>();
     }
 
-    public Transportadoras ( ArrayList<Transportadora> transportadoras) // construtor parametrizado
+    public Transportadoras ( Map<String,Transportadora> transportadoras) // construtor parametrizado
     {
         setTransportadoras(transportadoras); // de modo a permitir o encapsulamento de dados
     }
@@ -20,24 +19,21 @@ public class Transportadoras extends Main
         setTransportadoras(transportadoras.getTransportadoras());
     }
 
-    public void setTransportadoras(List<Transportadora> transportadoras) //construtor por copia
+    public void setTransportadoras(Map<String,Transportadora> transportadoras) //construtor por copia
     {
-        this.transportadoras = new ArrayList<>();
-        for (Transportadora transportadora : transportadoras)
-            this.transportadoras.add(transportadora.clone());
+        this.transportadoras = new HashMap<>();
+        this.transportadoras.entrySet().forEach(e -> this.transportadoras.put(e.getKey()
+                , e.getValue()).clone());
     }
 
-    public List<Transportadora> getTransportadoras()
+    public Map<String,Transportadora> getTransportadoras()
     {
-        List<Transportadora> aux = new ArrayList<>(); // temos de criar uma copia por causa do encapsulamento
-        for (Transportadora transportadora : this.transportadoras)
-            aux.add(transportadora.clone());
-        return aux;
+        return transportadoras;
     }
 
     public void adicionaTransportadora (Transportadora transportadora)
     {
-        this.transportadoras.add(transportadora);
+        this.transportadoras.put(transportadora.getCodigo(),transportadora.clone());
     }
 
 

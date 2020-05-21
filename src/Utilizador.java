@@ -56,7 +56,7 @@ public class Utilizador implements Serializable {
 
     public String toString()
     {
-        return "Utilizador -> " + "nickname: " + this.nickname+ ","
+        return "Utilizador " + this.nickname+ ","
               +  " Nome: " + this.nome +" " + ","
         + this.coordsU.toString() +"\n";
     }

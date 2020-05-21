@@ -1,16 +1,16 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Voluntarios extends Main
 {
-    private List<Voluntario> voluntarios;
+    private Map<String,Voluntario> voluntarios;
+
 
     public Voluntarios()  // construtor por omissao
     {
-        this.voluntarios = new ArrayList<>();
+        this.voluntarios = new HashMap<>();
     }
 
-    public Voluntarios( ArrayList<Voluntario> voluntarios) // construtor parametrizado
+    public Voluntarios( Map<String,Voluntario> voluntarios) // construtor parametrizado
     {
         setVoluntarios(voluntarios); // de modo a permitir o encapsulamento de dados
     }
@@ -20,25 +20,21 @@ public class Voluntarios extends Main
         setVoluntarios(vols.getVoluntarios());
     }
 
-    public void setVoluntarios(List<Voluntario> voluntarios) //construtor por copia
+    public void setVoluntarios(Map<String,Voluntario> voluntarios) //construtor por copia
     {
-        this.voluntarios = new ArrayList<>();
-        // para casa voluntario em vol, temos que o inserir em this.voluntarios
-        for (Voluntario vol : voluntarios)
-            this.voluntarios.add(vol.clone());
+        this.voluntarios = new HashMap<>();
+        this.voluntarios.entrySet().forEach(e -> this.voluntarios.put(e.getKey()
+                , e.getValue()).clone());
     }
 
-    public List<Voluntario> getVoluntarios()
+    public Map<String,Voluntario> getVoluntarios()
     {
-        List<Voluntario> aux = new ArrayList<>(); // temos de criar uma copia por causa do encapsulamento
-        for (Voluntario vol : this.voluntarios)
-            aux.add(vol.clone());
-        return aux;
+        return voluntarios;
     }
 
     public void adicionaVoluntario ( Voluntario volu)
     {
-        this.voluntarios.add(volu);
+        this.voluntarios.put(volu.getCod(),volu.clone());
     }
 }
   

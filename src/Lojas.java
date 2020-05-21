@@ -1,16 +1,15 @@
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
-public class Lojas extends Main
+public class Lojas
 {
-    private List<Loja> lojas;
+    private Map<String,Loja> lojas;
 
     public Lojas()  // construtor por omissao
     {
-        this.lojas = new ArrayList<>();
+        this.lojas = new HashMap<>();
     }
 
-    public Lojas ( ArrayList<Loja> lojas) // construtor parametrizado
+    public Lojas ( Map<String,Loja> lojas) // construtor parametrizado
     {
         setLojas(lojas); // de modo a permitir o encapsulamento de dados
     }
@@ -20,27 +19,29 @@ public class Lojas extends Main
         setLojas(lojas.getLojas());
     }
 
-    public void setLojas(List<Loja> lojas) //construtor por copia
+    public void setLojas(Map<String,Loja> lojas) //construtor por copia
     {
-        this.lojas = new ArrayList<>();
-        for (Loja loja : lojas)
-            this.lojas.add(loja.clone());
+        this.lojas = new HashMap<>();
+        this.lojas.entrySet().forEach(e -> this.lojas.put(e.getKey()
+                , e.getValue()).clone());
     }
 
-    public List<Loja> getLojas()
+    public Map<String,Loja> getLojas()
     {
-        List<Loja> aux = new ArrayList<>(); // temos de criar uma copia por causa do encapsulamento
-        for (Loja loja : this.lojas)
-            aux.add(loja.clone());
-        return aux;
+        return lojas;
     }
 
     public void adicionaLoja (Loja loja)
     {
-        this.lojas.add(loja);
+        this.lojas.put(loja.getCodigo(),loja.clone());
     }
 
-
+    public  String toString()
+    {
+        StringBuilder s = new StringBuilder();
+        s.append("Lista:").append(this.lojas);
+        return s.toString();
+    }
     public Lojas clone()
     {
         return new Lojas (this);
