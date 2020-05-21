@@ -42,12 +42,13 @@ public class Encomenda
         this.aceite = bool;
 
     }
-    public Encomenda(String vendedor, String comprador, String cod, double preco , Map<String,LinhaEncomenda> produtos)
+    public Encomenda(String vendedor, String comprador, String cod, double peso , Map<String,LinhaEncomenda> produtos)
     {
         this.vendedor = vendedor;
         this.comprador = comprador;
         this.cod = cod;
-        this.preco = preco;
+        this.peso = peso;
+        this.preco = 0;
         setProdutos(produtos);
         this.kms = 0; // temos que fazer uma funcao que calcula a distancia para aqui
         this.time = LocalDateTime.now();

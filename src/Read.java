@@ -44,7 +44,8 @@ import java.util.*;
 
 
                     if (textoSplit[0].equals("Aceite")) {
-                       verificaEstado(textoSplit[1], s);
+                        verificaEstado(textoSplit[1], s);
+
                     }
 
                 }
@@ -55,8 +56,11 @@ import java.util.*;
                 System.out.println("File not found");
             }
 
-           System.out.println(s.getUtilizadores().getUtilizadores().toString());
-           System.out.println(s.getEncomendas().getEncomendas().toString());
+            System.out.println(s.getUtilizadores().getUtilizadores().toString());
+            System.out.println(s.getEncomendas().getEncomendas().toString());
+            System.out.println(s.getTransportadoras().getTransportadoras().toString());
+            System.out.println(s.getVoluntarios().getVoluntarios().toString());
+            System.out.println(s.getLojas().getLojas().toString());
         }
 
 
@@ -67,7 +71,7 @@ import java.util.*;
             } else {
                 String textoSplit[] = buffer.split(","); // separa o texto pelos parametros
                 s.getUtilizadores().getUtilizadores().put(textoSplit[0], new Utilizador(textoSplit[0], textoSplit[1], Double.parseDouble(textoSplit[2]), Double.parseDouble(textoSplit[3])));
-              //System.out.println(s.getUtilizadores().getUtilizadores().toString());
+                //System.out.println(s.getUtilizadores().getUtilizadores().toString());
             }
         }
 
@@ -109,8 +113,8 @@ import java.util.*;
                 //  System.out.println("Isto nao interessa para nd"); //
             } else {
                 String textoSplit[] = buffer.split(","); // separa o texto pelos parametros
-                s.getEncomendas().getEncomendas().put(textoSplit[0], new Encomenda(textoSplit[0], textoSplit[1], (textoSplit[2]), Double.parseDouble(textoSplit[3]), aux(buffer)));
-             // System.out.println(s.getEncomendas());
+                s.getEncomendas().getEncomendas().put(textoSplit[0], new Encomenda(textoSplit[2], textoSplit[1], (textoSplit[0]), Double.parseDouble(textoSplit[3]), aux(buffer)));
+                // System.out.println(s.getEncomendas());
 
             }
         }
@@ -129,16 +133,24 @@ import java.util.*;
             return aux;
 
         }
-            public void verificaEstado(String buffer, Sistema s){
-               for (Encomenda v : s.getEncomendas().getEncomendas().values())
-                   if (v.getCodigo().equals(buffer)) {
-                       v.setAceite(true);
-                    System.out.println(v.getAceite());
 
-                   }
+        public void verificaEstado(String buffer, Sistema s) {
 
-
+            if (buffer.equals("<CodEccomenda>")) {
+               // System.out.println("Estou aqui");
             }
 
+            for (Encomenda v : s.getEncomendas().getEncomendas().values()) {
+                if (v.getCodigo().equals(buffer)) {
+                    v.setAceite(true);
+
+                }
+
+                 //System.out.println(v.getAceite());
+            }
 
         }
+
+
+    }
+
