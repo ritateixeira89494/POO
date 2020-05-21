@@ -14,7 +14,7 @@ public class Transportadora
     private double precototal;
 
 
-    Transportadora()
+    public Transportadora()
     {
         this.codigo= new String();
         this.nome = new String();
@@ -27,7 +27,7 @@ public class Transportadora
         this.precototal = 0;
     }
 
-    Transportadora(String codi, String nome,double latitude, double longitude, String nif, double raio, double preco, boolean bool, LocalDateTime time, double precototal)
+    public Transportadora(String codi, String nome,double latitude, double longitude, String nif, double raio, double preco, boolean bool, LocalDateTime time, double precototal)
     {
         this.codigo= codi;
         this.nome = nome;
@@ -52,6 +52,20 @@ public class Transportadora
         this.time = trans.getTime();
         this.precototal = trans.getTotal();
     }
+
+    public Transportadora(String cod, String nome, double latitude, double longitude,String nif, double raio, double preco)
+    {
+        this.codigo= cod;
+        this.nome = nome;
+        this.coordsT = new Ponto(latitude,longitude);
+        this.nif = nif;
+        this.raio = raio;
+        this.preco = preco;
+        this.disponibilidade = true;
+        this.time = LocalDateTime.now();
+        this.precototal = 0;
+    }
+
 
     public LocalDateTime getTime()
     {

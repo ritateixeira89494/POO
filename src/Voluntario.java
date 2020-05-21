@@ -2,11 +2,10 @@ import java.time.LocalDateTime;
 
 public class Voluntario
 {
-    private String nome;
     private String cod;
+    private String nome;
+    private Ponto gps;
     private double raio;
-    private double latitude;
-    private double longitude;
     private boolean livre;
     private LocalDateTime time;
     private String encomenda;
@@ -16,20 +15,18 @@ public class Voluntario
         this.nome = new String();
         this.cod = new String();
         this.raio = 0;
-        this.latitude = 0;
-        this.longitude = 0;
+        this.gps = new Ponto();
         this.livre = true;
         this.time = LocalDateTime.now();
         this.encomenda = new String();
     }
 
-    public Voluntario(String nome, String cod, double raio,double latitude, double longitude, boolean bool, LocalDateTime time, String encomenda) // construtor parametrizado
+    public Voluntario(String nome, String cod,double latitude, double longitude, boolean bool, LocalDateTime time, String encomenda) // construtor parametrizado
     {
         this.nome = nome;
         this.cod = cod;
         this.raio = raio;
-        this.latitude = latitude;
-        this.longitude = longitude;
+        this.gps = new Ponto(latitude,longitude);
         this.livre = bool;
         this.time = time;
         this.encomenda = encomenda;
@@ -40,11 +37,21 @@ public class Voluntario
         this.nome = vol.getNome();
         this.cod = vol.getCod();
         this.raio = vol.getRaio();
-        this.latitude = vol.getLatitude();
-        this.longitude = vol.getLongitude();
+        this.gps = new Ponto(vol.getGPS().getX(),vol.getGPS().getY());
         this.livre = vol.getLivre();
         this.time = vol.getTime();
         this.encomenda = vol.getEncomenda();
+    }
+
+    public Voluntario(String nome, String cod, double raio,double latitude, double longitude) // construtor para leitura
+    {
+        this.nome = nome;
+        this.cod = cod;
+        this.raio = raio;
+        this.gps = new Ponto(latitude,longitude);
+        this.livre = true;
+        this.time = LocalDateTime.now();
+        this.encomenda = new String();
     }
 
     public String getNome()
@@ -67,14 +74,8 @@ public class Voluntario
         return this.raio;
     }
 
-    public double getLatitude()
-    {
-        return this.latitude;
-    }
-
-    public double getLongitude()
-    {
-        return this.longitude;
+    public Ponto getGPS() {
+        return this.gps;
     }
 
     public boolean getLivre()

@@ -6,6 +6,7 @@ public class Main {
         new Transportadoras();
         new Voluntarios();
         new Sistema();
-
+        Read rl = new Read();
+        rl.readLog();
     }
 }

@@ -1,3 +1,4 @@
+import java.nio.file.LinkOption;
 import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
@@ -6,6 +7,7 @@ import java.io.Serializable;
 public class Loja implements Serializable
 {
     private String nome;
+    private String cod;
     private List<Produtos> produtos;
     private LocalDateTime tempoEspera;
     private LocalDateTime tempoProcessamento;
@@ -17,6 +19,7 @@ public class Loja implements Serializable
     public Loja()
     {
         this.nome = new String();
+        this.cod = new String();
         this.produtos = new ArrayList<>();
         this.tempoEspera = LocalDateTime.now();
         this.tempoProcessamento = LocalDateTime.now();
@@ -26,9 +29,10 @@ public class Loja implements Serializable
         this.encomendasConcluidas = 0;
     }
 
-    public Loja(String nome, List<Produtos> produtos, LocalDateTime tempoEspera, LocalDateTime tempoProcessamento, int pessoasEspera, double latitude, double longitude, boolean bool, int nmr)
+    public Loja(String nome,String cod, List<Produtos> produtos, LocalDateTime tempoEspera, LocalDateTime tempoProcessamento, int pessoasEspera, double latitude, double longitude, boolean bool, int nmr)
     {
         this.nome = nome;
+        this.cod = cod;
         this.produtos = produtos;
         this.tempoEspera = tempoEspera;
         this.tempoProcessamento = tempoProcessamento;
@@ -38,9 +42,24 @@ public class Loja implements Serializable
         this.encomendasConcluidas = nmr;
     }
 
+    public Loja(String cod, String nome, double latitude, double longitude)
+    {
+        this.nome = nome;
+        this.cod = cod;
+        this.produtos =new ArrayList<>();
+        this.tempoEspera = LocalDateTime.now();
+        this.tempoProcessamento = LocalDateTime.now();
+        this.pessoasEspera = 0;
+        this.coordsL = new Ponto(latitude,longitude);
+        this.existeEncomenda = false;
+        this.encomendasConcluidas = 0;
+
+    }
+
     public Loja(Loja loja )
     {
         this.nome = loja.getNome();
+        this.cod = loja.getCodigo();
         setProdutos(loja.getProdutos());
         this.tempoEspera = loja.getTempoEspera();
         this.tempoProcessamento = loja.getTempo();
@@ -78,6 +97,11 @@ public class Loja implements Serializable
     public String getNome()
     {
         return this.nome;
+    }
+
+    public String getCodigo()
+    {
+        return this.cod;
     }
 
     /** Getter das coordenadas. */

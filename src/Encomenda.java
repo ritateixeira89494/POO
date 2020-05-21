@@ -3,48 +3,56 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Encomenda extends Lojas
+public class Encomenda
 {
     private String vendedor;
     private String comprador;
+    private String cod;
     private double peso;
     private double preco;
     private List<Produtos> produtos;
     private double kms;
     private LocalDateTime time;
+    private boolean aceite;
 
 
-    Encomenda()
+    public Encomenda()
     {
         this.vendedor = new String();
         this.comprador = new String();
+        this.cod = new String();
         this.peso = 0;
         this.preco = 0;
         this.produtos = new ArrayList<>();
         this.kms = 0;
         this.time = LocalDateTime.now();
+        this.aceite = false;
     }
 
-    Encomenda(String vendedor, String comprador, double peso, double preco , List<Produtos> produtos,double kms, LocalDateTime time)
+    public Encomenda(String vendedor, String comprador, String cod, double peso, double preco , List<Produtos> produtos,double kms, LocalDateTime time, boolean bool)
     {
         this.vendedor = vendedor;
         this.comprador = comprador;
+        this.cod = cod;
         this.peso = peso;
         this.preco = preco;
         setProdutos(produtos);
         this.kms = kms;
         this.time = time;
+        this.aceite = bool;
     }
 
     Encomenda (Encomenda enc)
     {
         this.vendedor = enc.getVendedor();
         this.comprador = enc.getComprador();
+        this.cod = enc.getCodigo();
         this.peso = enc.getPeso();
         this.preco = enc.getPreco();
         setProdutos(enc.getProdutos());
         this.kms = enc.getKms();
         this.time = enc.getTime();
+        this.aceite = enc.getEstado();
     }
 
     public void setProdutos(List<Produtos> produtos) //construtor por copia
@@ -67,6 +75,10 @@ public class Encomenda extends Lojas
         return this.time;
     }
 
+    public String getCodigo() {
+        return this.cod;
+    }
+
     public String getVendedor()
     {
         return this.vendedor;
@@ -80,6 +92,16 @@ public class Encomenda extends Lojas
     public double getPeso()
     {
         return this.peso;
+    }
+
+    public boolean getEstado()
+    {
+        return this.aceite;
+    }
+
+    public void setAceite(Boolean bool)
+    {
+        this.aceite = bool;
     }
 
     public double getPreco()

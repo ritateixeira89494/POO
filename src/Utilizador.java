@@ -53,6 +53,14 @@ public class Utilizador implements Serializable {
         this.nickname = nickname;
     }
 
+
+    public String toString()
+    {
+        return "Utilizador -> " + "nickname: " + this.nickname+ ","
+              +  " Nome: " + this.nome +" " + ","
+        + this.coordsU.toString() +"\n";
+    }
+
     public Utilizador clone()
     {
         return new Utilizador(this);
