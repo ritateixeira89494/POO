@@ -45,5 +45,38 @@ public class Utilizadores {
         return s.toString();
     }
 
+    public boolean validaEmail(String user, String email)
+    {
+        boolean b = false;
+        for (Utilizador v : this.utilizadores.values())
+            if(v.getNickname().equals("user"))
+            {
+                if(v.getEmail().equals(email))
+                {
+                    b = true;}
+                else{System.out.println("Email errado");} // para dps ficar mais bonito utilizar Exception
+            }
+        else {
+                System.out.println("Utilizador não existe"); // para dps ficar mais bonito utilizar Exception
+            }
+        return b;
+    }
+
+    public boolean validaPass(String user, String pass)
+    {
+        boolean b = false;
+        for (Utilizador v : this.utilizadores.values())
+            if(v.getNickname().equals("user"))
+            {
+                if(v.getPass().equals(pass))
+                {
+                    b = true;}
+                else{System.out.println("Passe errado");} // para dps ficar mais bonito utilizar Exception
+            }
+            else {
+                System.out.println("Utilizador não existe"); // para dps ficar mais bonito utilizar Exception
+            }
+        return b;
+    }
 
 }
