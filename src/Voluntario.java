@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Voluntario
+public class Voluntario implements Serializable
 {
     private String cod;
     private String nome;
@@ -86,6 +87,13 @@ public class Voluntario
     public LocalDateTime getTime()
     {
         return this.time;
+    }
+
+    public String toString(){
+        return "Voluntario -> Código: " + this.cod
+                + ", Nome: " + this.nome
+                + ", Coordenadas: " + this.gps
+                + ", Raio: " + this.raio + "\n";
     }
 
     public Voluntario clone()

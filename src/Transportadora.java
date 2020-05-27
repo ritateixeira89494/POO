@@ -114,6 +114,15 @@ public class Transportadora
         return this.disponibilidade;
     }
 
+    public String toString(){
+        return "Transportadora -> CódigoEmpresa: " + this.codigo
+                + ", NomeEmpresa: " + this.nome
+                + ", Coordenadas: " + this.coordsT
+                + ", NIF: " + this.nif
+                + ", Raio: " + this.raio
+                + ", Preço/Km: " + this.preco + "\n";
+    }
+
     public Transportadora clone()
     {
         return new Transportadora(this);

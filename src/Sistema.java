@@ -1,4 +1,8 @@
 import java.util.Scanner;
+import java.util.*;
+import java.util.Map;
+import java.lang.*;
+
 
 public class Sistema extends Main{
     private Encomendas encomendas;
@@ -241,6 +245,70 @@ public class Sistema extends Main{
             throw new NaoExisteUtilizadorException();
 
     }
+
+
+    /** Devolve lista de voluntários disponiveis */
+    public Map<String, Voluntario> voluntariosDisponiveis(Map<String, Voluntario> voluntarios) {
+        Map<String, Voluntario> volDisp = new HashMap<String, Voluntario> ();
+        for(String voluntario : voluntarios.keySet()) {
+            if(voluntarios.get(voluntario).getLivre()) volDisp.put(voluntario, voluntarios.get(voluntario));
+        }
+        return volDisp;
+    }
+
+    /** Devolve lista de transportadoras disponiveis */
+    public Map<String, Transportadora> transportadorasDisponiveis(Map<String, Transportadora> transportadoras) {
+        Map<String, Transportadora> transDisp = new HashMap<String, Transportadora> ();
+        for(String transportadora : transportadoras.keySet()) {
+            if(transportadoras.get(transportadora).getDisponibilidade()) transDisp.put(transportadora, transportadoras.get(transportadora));
+        }
+        return transDisp;
+    }
+
+    /** Diz qual o voluntário mais proxima do utilizador user*/
+    public Voluntario voluntarioMaisProx(Utilizador user, Map<String,Voluntario> voluntarios) {
+        if(voluntarios.isEmpty()) return null;
+        else{
+            Voluntario vol = voluntarios.get(user);
+            double distMin = user.getCoords().distance(voluntarios.get(user).getGPS()), distTemp;
+
+            for(String voluntario : voluntarios.keySet()){
+                distTemp = user.getCoords().distance(voluntarios.get(voluntario).getGPS());
+                if( distTemp < distMin ) {
+                    vol = new Voluntario(voluntarios.get(voluntario));
+                    distMin = distTemp;}
+            }
+            return vol;
+        }
+    }
+
+    /** Diz qual a transportadora mais proxima do utilizador user*/
+    public Transportadora transportadoraMaisProx(Utilizador user, Map<String,Transportadora> transportadoras) {
+        if(transportadoras.isEmpty()) return null;
+        else{
+            Transportadora trans = transportadoras.get(user);
+            double distMin = user.getCoords().distance(transportadoras.get(user).getCoords()), distTemp;
+
+            for(String transportadora : transportadoras.keySet()){
+                distTemp = user.getCoords().distance(transportadoras.get(transportadora).getCoords());
+                if( distTemp < distMin ) {
+                    trans = new Transportadora(transportadoras.get(transportadora));
+                    distMin = distTemp;}
+            }
+            return trans;
+        }
+    }
+
+    /** Faz uma viagem com qualquer método de entrega mais proximo do destino pedido */
+    /*
+    public void viagemComMetodoMaisProx(Utilizador user, Map<String,Voluntario> voluntarios, Map<String,Transportadora> transportadoras, Ponto destino) {
+        if(user == null) System.out.println("Tem de fazer login!");
+        else {
+            voluntariosDisponiveis(voluntarios);
+            transportadorasDisponiveis(transportadoras);
+
+        }
+    }*/
 
 }
 

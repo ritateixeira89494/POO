@@ -31,6 +31,13 @@ public class Transportadoras
         return transportadoras;
     }
 
+    public  String toString()
+    {
+        StringBuilder s = new StringBuilder();
+        s.append("Lista: ").append(this.transportadoras);
+        return s.toString() + "\n";
+    }
+
     public void adicionaTransportadora (Transportadora transportadora)
     {
         this.transportadoras.put(transportadora.getCodigo(),transportadora.clone());

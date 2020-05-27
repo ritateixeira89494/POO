@@ -36,7 +36,7 @@ public class Utilizadores {
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("Lista:").append(this.utilizadores);
-        return s.toString();
+        return s.toString() + "\n";
     }
 }
 

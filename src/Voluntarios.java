@@ -32,6 +32,13 @@ public class Voluntarios extends Main
         return voluntarios;
     }
 
+    public  String toString()
+    {
+        StringBuilder s = new StringBuilder();
+        s.append("Lista: ").append(this.voluntarios);
+        return s.toString() + "\n";
+    }
+
     public void adicionaVoluntario ( Voluntario volu)
     {
         this.voluntarios.put(volu.getCod(),volu.clone());

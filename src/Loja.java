@@ -128,6 +128,13 @@ public class Loja implements Serializable
         return this.tempoProcessamento;
     }
 
+    public String toString()
+    {
+        return "Utilizador -> " + "Código: " + this.cod+ ","
+                +  " Nome: " + this.nome +" " + ","
+                + this.coordsL.toString() +"\n";
+    }
+
     public void adicionaPessoaEspera()
     {
         this.pessoasEspera +=1;

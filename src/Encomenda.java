@@ -126,8 +126,12 @@ public class Encomenda
 
     public String toString()
     {
-        return  "Aceite" + this.aceite;
-
+        return  "Encomenda -> Código: " + this.cod
+                + ", CódigoUtilizador: " + this.comprador
+                + ", CódigoLoja: " + this.vendedor
+                + ", Peso: " + this.peso
+                + ", LinhaEncomenda: " + this.produtos
+                + "Aceite" + this.aceite;
     }
 
     public Encomenda clone()

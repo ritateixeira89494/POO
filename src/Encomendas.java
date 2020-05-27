@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Encomendas
+public class Encomendas extends Encomenda
 {
     private Map<String,Encomenda> encomendas;
 
@@ -37,9 +37,10 @@ public class Encomendas
     public  String toString()
     {
         StringBuilder s = new StringBuilder();
-        s.append("Lista:").append(this.encomendas);
-        return s.toString();
+        s.append("Lista: ").append(this.encomendas);
+        return s.toString() + "\n";
     }
+
     public Encomendas clone()
     {
         return new Encomendas((Map<String,Encomenda>) this);
