@@ -146,6 +146,73 @@ public class Sistema extends Main{
 
     }
 
+    public void pedidoEncomenda(String user) throws ExisteEncomenda, ExisteLojaException {
+        System.out.println("Pedido de Encomenda");
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Digite o código da sua encomenda ");
+        String codigo = sc.nextLine();
+        Map<String, LinhaEncomenda> produtos = new HashMap<>();
+
+        try {
+            if (!(existeEncomenda(codigo))) {
+                System.out.println("Insira o codigo da loja da qual quer efetuar a encomenda");
+                String codLoja = sc.nextLine();
+                try {
+                    if(existeLoja(codLoja)) {
+                        System.out.println("Insira o peso da encomenda:");
+                        double peso = sc.nextDouble();
+                        int option = 1;
+
+                        while (option != 0) {
+
+
+                            System.out.println("Insira o que quer efetuar na sua encomenda");
+
+                            System.out.print("Código do Produto:");
+                            String codeNC = sc.next();
+                            System.out.print("Descrição do Produto:");
+                            String descreNC = sc.next();
+                            System.out.print("Quantidade:");
+                            double quant = sc.nextDouble();
+                            System.out.print("Valor unitário:");
+                            double val = sc.nextDouble();
+
+                            System.out.println("CONFIRMAR LINHA DE ENCOMENDA");
+                            System.out.println("Código da Produto->" + codeNC);
+                            System.out.println("Descrição do Produto ->" + descreNC);
+                            System.out.println("Quantidade " + quant);
+                            System.out.println("Valor unitário " + val);
+
+
+                            System.out.println("Inserir Linha de encomenda? S/N?");
+                            String verifica = sc.next();
+                            if (verifica.equals("S")) {
+                                produtos.put(codeNC, new LinhaEncomenda(descreNC, codeNC, quant, val));
+                            }
+                            System.out.println("Acabou a encomenda?");
+                            System.out.println("0-se sim  1-para continuar");
+                            option = sc.nextByte();
+
+                        }
+                        encomendas.getEncomendas().put(codigo, new Encomenda(codLoja, user, codigo, peso, produtos));
+                    }
+                } catch (NaoExisteLojaException h) {
+                    System.out.println("Nao existe loja com o código " + codLoja);
+                }
+                //this.voluntarios.getVoluntarios().put(codigo,new Voluntario(nome,codigo,raio, x, y));
+
+            }
+        }
+
+        catch(ExisteEncomenda l)
+        {
+            System.out.println("Já existe uma encomenda com esse código " + codigo);
+        }
+
+        System.out.println(encomendas.getEncomendas().toString());
+        System.out.println(produtos);
+    }
+
     public void iniciarLogin() throws NaoExisteUtilizadorException, ExisteUtilizadorException {
         Scanner sc = new Scanner(System.in);
         System.out.println("-------LOGIN-------");
@@ -309,6 +376,27 @@ public class Sistema extends Main{
 
         }
     }*/
+
+    public boolean existeEncomenda(String cod) throws ExisteEncomenda
+    {
+        if(encomendas.getEncomendas().containsKey(cod))
+        {
+            throw new ExisteEncomenda();
+        }
+
+        return false;
+
+    }
+    public boolean existeLoja(String cod) throws NaoExisteLojaException
+    {
+        if(lojas.getLojas().containsKey(cod))
+        {
+            return true;
+        }
+
+        throw new NaoExisteLojaException();
+
+    }
 
 }
 
