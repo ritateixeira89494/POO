@@ -43,6 +43,28 @@ public class Transportadoras
         this.transportadoras.put(transportadora.getCodigo(),transportadora.clone());
     }
 
+    public Object[] topTransportadoras() {
+
+        Map<Transportadora, Double> mp = new HashMap<>();
+        for (String s : this.transportadoras.keySet()) {
+
+            mp.putIfAbsent(this.transportadoras.get(s), this.transportadoras.get(s).getKmsTotal());
+
+        }
+        Object[] a = mp.entrySet().toArray();
+        Arrays.sort(a, new Comparator() {
+            public int compare(Object o1, Object o2) {
+                if (((Map.Entry<String,Integer>) o1).getValue()
+                        .compareTo(((Map.Entry<String,Integer>) o2).getValue()) > 0) return -1;
+                else if (((Map.Entry<String, Integer>) o1).getValue()
+                        .compareTo(((Map.Entry<String, Integer>) o2).getValue()) < 0) return 1;
+                else return ((Map.Entry<String, Integer>) o1).getKey()
+                            .compareTo(((Map.Entry<String, Integer>) o2).getKey());
+            }
+        });
+        return a;
+    }
+
 
     public Transportadoras clone()
     {
