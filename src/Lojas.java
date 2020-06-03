@@ -40,7 +40,7 @@ public class Lojas
     {
         StringBuilder s = new StringBuilder();
         s.append("Lista:").append(this.lojas);
-        return s.toString() + "\n";
+        return s.toString();
     }
     public Lojas clone()
     {

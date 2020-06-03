@@ -1,7 +1,8 @@
-import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Voluntario implements Serializable
+public class Voluntario
 {
     private String cod;
     private String nome;
@@ -10,6 +11,8 @@ public class Voluntario implements Serializable
     private boolean livre;
     private LocalDateTime time;
     private String encomenda;
+    private List<String> avaliacoes;
+    private int nmrClassificadores;
 
     public Voluntario() // construtor por omissao
     {
@@ -20,9 +23,11 @@ public class Voluntario implements Serializable
         this.livre = true;
         this.time = LocalDateTime.now();
         this.encomenda = new String();
+        this.nmrClassificadores=0;
+        this.avaliacoes = new ArrayList<>();
     }
 
-    public Voluntario(String nome, String cod,double latitude, double longitude, boolean bool, LocalDateTime time, String encomenda) // construtor parametrizado
+    public Voluntario(String nome, String cod,double latitude, double longitude, boolean bool, LocalDateTime time, String encomenda,int nmrClassificadores, List<String> classificacoes) // construtor parametrizado
     {
         this.nome = nome;
         this.cod = cod;
@@ -31,6 +36,8 @@ public class Voluntario implements Serializable
         this.livre = bool;
         this.time = time;
         this.encomenda = encomenda;
+        this.nmrClassificadores= 0;
+        setClassificacoes(classificacoes);
     }
 
     public Voluntario(Voluntario vol) //construtor por copia
@@ -42,6 +49,7 @@ public class Voluntario implements Serializable
         this.livre = vol.getLivre();
         this.time = vol.getTime();
         this.encomenda = vol.getEncomenda();
+        this.nmrClassificadores= vol.getNmr();
     }
 
     public Voluntario(String nome, String cod, double raio,double latitude, double longitude) // construtor para leitura
@@ -60,9 +68,39 @@ public class Voluntario implements Serializable
         return this.nome;
     }
 
+    public int getNmr()
+    {
+        return this.nmrClassificadores;
+    }
+
+    public List<String> getnmrClassificadores()
+    {
+        return this.avaliacoes;
+    }
+
+    //public double classificacaoMedia()
+    //{
+        //percorrer a lista das classificacoes, somar tudo e dividir pelo nmr de classificadores
+    //}
+
+
+    public void setClassificacoes(List<String> lps)
+    {
+        this.avaliacoes = new ArrayList<>();
+        // para cada lampada l que esta em lps, temos de inserir em this.lampadas
+        for (String l :lps)
+            this.avaliacoes.add(l);
+    }
+
     public String getEncomenda()
     {
         return this.encomenda;
+    }
+
+    public void adicionaAvaliacao(String avaliacao)
+    {
+        this.nmrClassificadores +=1;
+        this.avaliacoes.add(avaliacao);
     }
 
     public String getCod()
@@ -87,13 +125,6 @@ public class Voluntario implements Serializable
     public LocalDateTime getTime()
     {
         return this.time;
-    }
-
-    public String toString(){
-        return "Voluntario -> Código: " + this.cod
-                + ", Nome: " + this.nome
-                + ", Coordenadas: " + this.gps
-                + ", Raio: " + this.raio + "\n";
     }
 
     public Voluntario clone()

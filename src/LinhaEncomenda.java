@@ -57,9 +57,8 @@ public class LinhaEncomenda
 
     public String toString()
     {
-        return "LinhaEncomenda -> CódigoProduto: " + this.codigo + " ,"
-                + " Descrição: " + this.nome + " ,"
-                + " Quantidade" + this.quantidade + " ,"
-                + " Preço: " + this.preco + " ," + "\n";
+        return   this.codigo+ ","
+                +  " Nome: " + this.nome +" " + ","
+                + "Preco: " + this.preco + "Quatidade: " + this.quantidade + "\n";
     }
 }

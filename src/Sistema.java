@@ -1,8 +1,6 @@
-import java.util.Scanner;
-import java.util.*;
+import java.util.HashMap;
 import java.util.Map;
-import java.lang.*;
-
+import java.util.Scanner;
 
 public class Sistema extends Main{
     private Encomendas encomendas;
@@ -47,23 +45,23 @@ public class Sistema extends Main{
 
   public void registarUtilizador() throws ExisteUtilizadorException
   {
-      System.out.println("Inserir um Utilizador");
-      Scanner sc = new Scanner(System.in);
-      System.out.println("Digite nome ");
-      String nome = sc.nextLine();
-      System.out.println("Digite user ");
-      String user = sc.nextLine();
-      System.out.println("Digite x ");
-      Double x = sc.nextDouble();
-      System.out.println("Digite y ");
-      Double y = sc.nextDouble();
+      OutputView.print("Inserir um Utilizador");
+
+      OutputView.print("Digite nome ");
+      String nome = Input.lerString();
+      OutputView.print("Digite user ");
+      String user = Input.lerString();
+      OutputView.print("Digite x ");
+      Double x = Input.lerDouble();
+      OutputView.print("Digite y ");
+      Double y = Input.lerDouble();
 
       if(this.utilizadores.getUtilizadores().containsKey(user))
       {
           throw new ExisteUtilizadorException();
       }
       else {
-          System.out.println("Novo utilizador criado!");
+          OutputView.print("Novo utilizador criado!");
           this.utilizadores.getUtilizadores().put(user,new Utilizador(user, nome, x, y));
       }
 
@@ -71,18 +69,18 @@ public class Sistema extends Main{
 
     public void registarVoluntario() throws ExisteVoluntarioException
     {
-        System.out.println("Registar um voluntário");
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Digite o nome ");
-        String nome = sc.nextLine();
-        System.out.println("Digite o código ");
-        String codigo = sc.nextLine();
-        System.out.println("Digite o raio ");
-        Double raio = sc.nextDouble();
-        System.out.println("Digite x ");
-        Double x = sc.nextDouble();
-        System.out.println("Digite y ");
-        Double y = sc.nextDouble();
+        OutputView.print("Registar um voluntário");
+
+        OutputView.print("Digite o nome ");
+        String nome = Input.lerString();
+        OutputView.print("Digite o código ");
+        String codigo = Input.lerString();
+        OutputView.print("Digite o raio ");
+        Double raio = Input.lerDouble();
+        OutputView.print("Digite x ");
+        Double x = Input.lerDouble();
+        OutputView.print("Digite y ");
+        Double y = Input.lerDouble();
 
         if(this.voluntarios.getVoluntarios().containsKey(codigo))
         {
@@ -96,22 +94,22 @@ public class Sistema extends Main{
 
     public void registarTransportadora() throws ExisteTransportadoraException
     {
-        System.out.println("Registar uma transportadora");
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Digite o nome ");
-        String nome = sc.nextLine();
-        System.out.println("Digite o código ");
-        String codigo = sc.nextLine();
-        System.out.println("Digite o raio ");
-        Double raio = sc.nextDouble();
-        System.out.println("Digite x ");
-        Double x = sc.nextDouble();
-        System.out.println("Digite y ");
-        Double y = sc.nextDouble();
-        System.out.println("Digite o NIF ");
-        String nif = sc.nextLine();
-        System.out.println("Digite o preço ");
-        Double preco = sc.nextDouble();
+        OutputView.print("Registar uma transportadora");
+
+        OutputView.print("Digite o nome ");
+        String nome = Input.lerString();
+        OutputView.print("Digite o código ");
+        String codigo = Input.lerString();
+        OutputView.print("Digite o raio ");
+        Double raio = Input.lerDouble();
+        OutputView.print("Digite x ");
+        Double x = Input.lerDouble();
+        OutputView.print("Digite y ");
+        Double y = Input.lerDouble();
+        OutputView.print("Digite o NIF ");
+        String nif = Input.lerString();
+        OutputView.print("Digite o preço ");
+        Double preco = Input.lerDouble();
 
         if(this.transportadoras.getTransportadoras().containsKey(codigo))
         {
@@ -125,16 +123,16 @@ public class Sistema extends Main{
 
     public void registarLoja() throws ExisteLojaException
     {
-        System.out.println("Registar uma Loja");
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Insira o nome da Loja");
-        String nome = sc.nextLine();
-        System.out.println("Insira o codigo da Loja ");
-        String codigo = sc.nextLine();
-        System.out.println("Insira a coordenada em x da Loja");
-        Double x = sc.nextDouble();
-        System.out.println("Insira a coordenada em y da Loja");
-        Double y = sc.nextDouble();
+        OutputView.print("Registar uma Loja");
+
+        OutputView .print("Insira o nome da Loja");
+        String nome = Input.lerString();
+        OutputView.print("Insira o codigo da Loja ");
+        String codigo = Input.lerString();
+        OutputView.print("Insira a coordenada em x da Loja");
+        Double x = Input.lerDouble();
+        OutputView.print("Insira a coordenada em y da Loja");
+        Double y = Input.lerDouble();
 
         if(this.lojas.getLojas().containsKey(codigo))
         {
@@ -147,57 +145,56 @@ public class Sistema extends Main{
     }
 
     public void pedidoEncomenda(String user) throws ExisteEncomenda, ExisteLojaException {
-        System.out.println("Pedido de Encomenda");
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Digite o código da sua encomenda ");
-        String codigo = sc.nextLine();
+        OutputView.print("Pedido de Encomenda");
+        OutputView.print("Digite o código da sua encomenda ");
+        String codigo = Input.lerString();
         Map<String, LinhaEncomenda> produtos = new HashMap<>();
 
         try {
             if (!(existeEncomenda(codigo))) {
-                System.out.println("Insira o codigo da loja da qual quer efetuar a encomenda");
-                String codLoja = sc.nextLine();
+                OutputView.print("Insira o codigo da loja da qual quer efetuar a encomenda");
+                String codLoja = Input.lerString();
                 try {
                     if(existeLoja(codLoja)) {
-                        System.out.println("Insira o peso da encomenda:");
-                        double peso = sc.nextDouble();
+                        OutputView.print("Insira o peso da encomenda:");
+                        double peso = Input.lerDouble();
                         int option = 1;
 
                         while (option != 0) {
 
 
-                            System.out.println("Insira o que quer efetuar na sua encomenda");
+                            OutputView.print("Insira o que quer efetuar na sua encomenda");
 
-                            System.out.print("Código do Produto:");
-                            String codeNC = sc.next();
-                            System.out.print("Descrição do Produto:");
-                            String descreNC = sc.next();
-                            System.out.print("Quantidade:");
-                            double quant = sc.nextDouble();
-                            System.out.print("Valor unitário:");
-                            double val = sc.nextDouble();
+                            OutputView.print("Código do Produto:");
+                            String codeNC = Input.lerString();
+                            OutputView.print("Descrição do Produto:");
+                            String descreNC = Input.lerString();
+                            OutputView.print("Quantidade:");
+                            double quant = Input.lerDouble();
+                            OutputView.print("Valor unitário:");
+                            double val =Input.lerDouble();
 
-                            System.out.println("CONFIRMAR LINHA DE ENCOMENDA");
-                            System.out.println("Código da Produto->" + codeNC);
-                            System.out.println("Descrição do Produto ->" + descreNC);
-                            System.out.println("Quantidade " + quant);
-                            System.out.println("Valor unitário " + val);
+                            OutputView.print("CONFIRMAR LINHA DE ENCOMENDA");
+                            OutputView.print("Código da Produto->" + codeNC);
+                            OutputView.print("Descrição do Produto ->" + descreNC);
+                            OutputView.print("Quantidade " + quant);
+                            OutputView.print("Valor unitário " + val);
 
 
-                            System.out.println("Inserir Linha de encomenda? S/N?");
-                            String verifica = sc.next();
+                            OutputView.print("Inserir Linha de encomenda? S/N?");
+                            String verifica = Input.lerString();
                             if (verifica.equals("S")) {
                                 produtos.put(codeNC, new LinhaEncomenda(descreNC, codeNC, quant, val));
                             }
-                            System.out.println("Acabou a encomenda?");
-                            System.out.println("0-se sim  1-para continuar");
-                            option = sc.nextByte();
+                            OutputView.print("Acabou a encomenda?");
+                            OutputView.print("0-se sim  1-para continuar");
+                            option = Input.lerInt();
 
                         }
                         encomendas.getEncomendas().put(codigo, new Encomenda(codLoja, user, codigo, peso, produtos));
                     }
                 } catch (NaoExisteLojaException h) {
-                    System.out.println("Nao existe loja com o código " + codLoja);
+                    OutputView.print("Nao existe loja com o código " + codLoja);
                 }
                 //this.voluntarios.getVoluntarios().put(codigo,new Voluntario(nome,codigo,raio, x, y));
 
@@ -205,19 +202,21 @@ public class Sistema extends Main{
         }
 
         catch(ExisteEncomenda l)
-        {
-            System.out.println("Já existe uma encomenda com esse código " + codigo);
+            {
+                OutputView.print("Já existe uma encomenda com esse código " + codigo);
+            }
+
+        OutputView.print(encomendas.getEncomendas().toString());
+        OutputView.printMp(produtos);
         }
 
-        System.out.println(encomendas.getEncomendas().toString());
-        System.out.println(produtos);
-    }
+
 
     public void iniciarLogin() throws NaoExisteUtilizadorException, ExisteUtilizadorException {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("-------LOGIN-------");
-        System.out.println("Insira o seu user");
-        String user = sc.nextLine();
+
+        OutputView.print("-------LOGIN-------");
+        OutputView.print("Insira o seu user");
+        String user = Input.lerString();
         boolean f=false;
         boolean b=false;
 
@@ -225,23 +224,23 @@ public class Sistema extends Main{
                 if(validaUser(user)) {
 
                     while (b==false) {
-                        System.out.println("Insira o seu email");
-                        String email = sc.nextLine();
+                        OutputView.print("Insira o seu email");
+                        String email = Input.lerString();
                         if (validaEmail(user, email)) {
                             b = true;
                         } else {
-                            System.out.println("Email errado!");
+                            OutputView.print("Email errado!");
                         }
                     }
                         while (f==false)
                         {
-                            System.out.println("Insira a sua passe");
-                            String passe = sc.nextLine();
+                            OutputView.print("Insira a sua passe");
+                            String passe = Input.lerString();
                             if(validaPass(user,passe)) {
                                 f=true;
                             }
                             else {
-                                System.out.println("Passe errada!");
+                                OutputView.print("Passe errada!");
                             }
 
                         }
@@ -250,20 +249,20 @@ public class Sistema extends Main{
 
 
             } catch (NaoExisteUtilizadorException e) {
-                System.out.println("Não existe utiliziador com user " + user);
-                System.out.println("Criar um utilizador? S/N?");
-                String decide = sc.nextLine();
+                OutputView.print("Não existe utiliziador com user " + user);
+                OutputView.print("Criar um utilizador? S/N?");
+                String decide =Input.lerString();
                 if (decide.equals("S"))
                     try {
                         registarUtilizador();
                     }
                 catch (ExisteUtilizadorException t)
                 {
-                    System.out.println("Já eexiste um utilizador com esse user!");
+                    OutputView.print("Já existe um utilizador com esse user!");
                 }
 
                 else {
-                    System.out.println("Sair da aplicação?");
+                    OutputView.print("Sair da aplicação?");
                     //fazer funlão que feche
                 }
 
@@ -313,7 +312,26 @@ public class Sistema extends Main{
 
     }
 
+    public boolean existeEncomenda(String cod) throws ExisteEncomenda
+    {
+        if(encomendas.getEncomendas().containsKey(cod))
+        {
+            throw new ExisteEncomenda();
+        }
 
+        return false;
+
+    }
+    public boolean existeLoja(String cod) throws NaoExisteLojaException
+    {
+        if(lojas.getLojas().containsKey(cod))
+        {
+        return true;
+        }
+
+        throw new NaoExisteLojaException();
+
+    }
     /** Devolve lista de voluntários disponiveis */
     public Map<String, Voluntario> voluntariosDisponiveis(Map<String, Voluntario> voluntarios) {
         Map<String, Voluntario> volDisp = new HashMap<String, Voluntario> ();
@@ -376,27 +394,6 @@ public class Sistema extends Main{
 
         }
     }*/
-
-    public boolean existeEncomenda(String cod) throws ExisteEncomenda
-    {
-        if(encomendas.getEncomendas().containsKey(cod))
-        {
-            throw new ExisteEncomenda();
-        }
-
-        return false;
-
-    }
-    public boolean existeLoja(String cod) throws NaoExisteLojaException
-    {
-        if(lojas.getLojas().containsKey(cod))
-        {
-            return true;
-        }
-
-        throw new NaoExisteLojaException();
-
-    }
 
 }
 

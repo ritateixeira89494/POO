@@ -1,7 +1,5 @@
 import java.time.LocalDateTime;
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Transportadora
 {
@@ -14,8 +12,6 @@ public class Transportadora
     private boolean disponibilidade;
     private LocalDateTime time;
     private double precototal;
-    private double kmsTotal; // para utilizar no treeSet para o top 10 em função dos kms;
-    private Map<String,Integer> classificacoes;
 
 
     public Transportadora()
@@ -29,11 +25,9 @@ public class Transportadora
         this.disponibilidade = true;
         this.time = LocalDateTime.now();
         this.precototal = 0;
-        this.kmsTotal = 0;
-        this.classificacoes = new HashMap<>();
     }
 
-    public Transportadora(String codi, String nome,double latitude, double longitude, String nif, double raio, double preco, boolean bool, LocalDateTime time, double precototal, double kms, Map<String,Integer> avaliacoes )
+    public Transportadora(String codi, String nome,double latitude, double longitude, String nif, double raio, double preco, boolean bool, LocalDateTime time, double precototal)
     {
         this.codigo= codi;
         this.nome = nome;
@@ -44,8 +38,6 @@ public class Transportadora
         this.disponibilidade = bool;
         this.time = time;
         this.precototal = precototal;
-        this.kmsTotal=kms;
-        setClassificacoes(classificacoes);
     }
 
     Transportadora(Transportadora trans)
@@ -59,8 +51,6 @@ public class Transportadora
         this.disponibilidade = trans.getDisponibilidade();
         this.time = trans.getTime();
         this.precototal = trans.getTotal();
-        this.kmsTotal = trans.getKmsTotal();
-        setClassificacoes(trans.getClassificacoes());
     }
 
     public Transportadora(String cod, String nome, double latitude, double longitude,String nif, double raio, double preco)
@@ -74,25 +64,8 @@ public class Transportadora
         this.disponibilidade = true;
         this.time = LocalDateTime.now();
         this.precototal = 0;
-        this.kmsTotal=0;
     }
 
-    public double getKmsTotal() {
-        return this.kmsTotal;
-    }
-
-    public void setClassificacoes(Map<String,Integer> classificacoes) {
-        this.classificacoes = new HashMap<>();
-        this.classificacoes.entrySet().forEach(e -> this.classificacoes.put(e.getKey()
-                , e.getValue()));//.clone());  // nao aceita clone??!!
-    }
-
-    public Map<String, Integer> getClassificacoes() {
-        Map<String,Integer> aux = new HashMap<>();
-        for (Map.Entry<String,Integer> e : this.classificacoes.entrySet())
-            aux.put(e.getKey(), e.getValue());//.clone());
-        return aux;
-    }
 
     public LocalDateTime getTime()
     {
@@ -141,33 +114,9 @@ public class Transportadora
         return this.disponibilidade;
     }
 
-    public String toString(){
-        return "Transportadora -> CódigoEmpresa: " + this.codigo
-                + ", NomeEmpresa: " + this.nome
-                + ", Coordenadas: " + this.coordsT
-                + ", NIF: " + this.nif
-                + ", Raio: " + this.raio
-                + ", Preço/Km: " + this.preco + "\n";
-    }
-
-    public void adicionaKms(double km)
-    {
-        this.kmsTotal += km;
-    }
-
-    public void insereClassificacao(Utilizador uti, int classificacao)
-    {
-        this.classificacoes.put(uti.getNickname(), classificacao);
-    }
-
     public Transportadora clone()
     {
         return new Transportadora(this);
-    }
-
-    public void setPrecototal(double peso,double distancia)
-    {
-        this.precototal += this.preco * peso * distancia;
     }
 }
 

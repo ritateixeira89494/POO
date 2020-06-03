@@ -53,25 +53,25 @@ import java.util.*;
                 lerArquivo.close();
 
             } catch (IOException e) {
-                System.out.println("File not found");
+                OutputView.print("File not found");
             }
 
-            System.out.println(s.getUtilizadores().getUtilizadores().toString());
-            System.out.println(s.getEncomendas().getEncomendas().toString());
-            System.out.println(s.getTransportadoras().getTransportadoras().toString());
-            System.out.println(s.getVoluntarios().getVoluntarios().toString());
-            System.out.println(s.getLojas().getLojas().toString());
+            OutputView.print(s.getUtilizadores().getUtilizadores().toString());
+            OutputView.print(s.getEncomendas().getEncomendas().toString());
+            OutputView.print(s.getTransportadoras().getTransportadoras().toString());
+            OutputView.print(s.getVoluntarios().getVoluntarios().toString());
+            OutputView.print(s.getLojas().getLojas().toString());
         }
 
 
         public void separaInfoUtilizador(String buffer, Sistema s) {
 
             if (buffer.equals("<CodUtilizador>,<Nome>,<GPS>")) {
-                //  System.out.println("Isto nao interessa para nd");
+                //  OutputView.print("Isto nao interessa para nd");
             } else {
                 String textoSplit[] = buffer.split(","); // separa o texto pelos parametros
                 s.getUtilizadores().getUtilizadores().put(textoSplit[0], new Utilizador(textoSplit[0], textoSplit[1], Double.parseDouble(textoSplit[2]), Double.parseDouble(textoSplit[3])));
-                //System.out.println(s.getUtilizadores().getUtilizadores().toString());
+                //OutputView.print(s.getUtilizadores().getUtilizadores().toString());
             }
         }
 
@@ -79,7 +79,7 @@ import java.util.*;
 
 
             if (buffer.equals("<CodVoluntÃ¡rio>, <Nome>,<GPS> ,<Raio>Â")) {
-                //  System.out.println("Isto nao interessa para nd");
+                //  OutputView.print("Isto nao interessa para nd");
             } else {
                 String textoSplit[] = buffer.split(","); // separa o texto pelos parametros
                 s.getVoluntarios().getVoluntarios().put(textoSplit[0], new Voluntario(textoSplit[1], textoSplit[0], Double.parseDouble(textoSplit[4]), Double.parseDouble(textoSplit[2]), Double.parseDouble(textoSplit[3])));
@@ -89,7 +89,7 @@ import java.util.*;
         public void separaTransportadora(String buffer, Sistema s) {
 
             if (buffer.equals("<CodEmpresa>,<NomeEmpresa>,<GPS>,<NIF>,<raio>,<preco-por-km>")) {
-                //  System.out.println("Isto nao interessa para nd"); //
+                //  OutputView.print("Isto nao interessa para nd"); //
             } else {
                 String textoSplit[] = buffer.split(","); // separa o texto pelos parametros
                 s.getTransportadoras().getTransportadoras().put(textoSplit[0], new Transportadora(textoSplit[0], textoSplit[1], Double.parseDouble(textoSplit[2]), Double.parseDouble(textoSplit[3]), textoSplit[4], Double.parseDouble(textoSplit[5]), Double.parseDouble(textoSplit[6])));
@@ -99,7 +99,7 @@ import java.util.*;
         public void separaLoja(String buffer, Sistema s) {
 
             if (buffer.equals("<CodLoja>, <NomeLoja>,<GPS>")) {
-                //  System.out.println("Isto nao interessa para nd"); //
+                //  OutputView.print("Isto nao interessa para nd"); //
             } else {
                 String textoSplit[] = buffer.split(","); // separa o texto pelos parametros
                 s.getLojas().getLojas().put(textoSplit[0], new Loja(textoSplit[0], textoSplit[1], Double.parseDouble(textoSplit[2]), Double.parseDouble(textoSplit[3])));
@@ -110,11 +110,11 @@ import java.util.*;
         public void separaEncomenda(String buffer, Sistema s) {
 
             if (buffer.equals("<CodEncomenda>, <CodUtilizador>, <CodLoja>, <Peso>, <LinhaEncomenda>+")) {
-                //  System.out.println("Isto nao interessa para nd"); //
+                //  OutputView.print("Isto nao interessa para nd"); //
             } else {
                 String textoSplit[] = buffer.split(","); // separa o texto pelos parametros
                 s.getEncomendas().getEncomendas().put(textoSplit[0], new Encomenda(textoSplit[2], textoSplit[1], (textoSplit[0]), Double.parseDouble(textoSplit[3]), aux(buffer)));
-                // System.out.println(s.getEncomendas());
+                // OutputView.print(s.getEncomendas());
 
             }
         }
@@ -129,7 +129,7 @@ import java.util.*;
 
                 i += 4;
             }
-            //  System.out.println(aux.get(textoSplit[4]).getPreco());
+            //  OutputView.print(aux.get(textoSplit[4]).getPreco());
             return aux;
 
         }
@@ -137,7 +137,7 @@ import java.util.*;
         public void verificaEstado(String buffer, Sistema s) {
 
             if (buffer.equals("<CodEccomenda>")) {
-               // System.out.println("Estou aqui");
+               // OutputView.print("Estou aqui");
             }
 
             for (Encomenda v : s.getEncomendas().getEncomendas().values()) {
@@ -146,7 +146,7 @@ import java.util.*;
 
                 }
 
-                 //System.out.println(v.getAceite());
+                 //OutputView.print(v.getAceite());
             }
 
         }

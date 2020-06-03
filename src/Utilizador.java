@@ -1,5 +1,4 @@
 import java.io.Serializable;
-import java.util.TreeSet;
 
 public class Utilizador implements Serializable {
 
@@ -8,7 +7,6 @@ public class Utilizador implements Serializable {
     private Ponto coordsU;
     private String email;
     private String pass;
-    private int nmrUtilizacoes;
 
     public Utilizador()
     {
@@ -17,7 +15,6 @@ public class Utilizador implements Serializable {
         this.coordsU = new Ponto();
         this.email = new String();
         this.pass = new String();
-        this.nmrUtilizacoes = 0;
     }
 
     public Utilizador( String nickname, String nome, double latitude, double longitude)
@@ -27,7 +24,6 @@ public class Utilizador implements Serializable {
         this.coordsU = new Ponto(latitude,longitude);
         this.email = nickname + "@poo20.pt";
         this.pass= nickname + primeiroNome(nome);
-        this.nmrUtilizacoes = 0;
     }
 
     public Utilizador ( Utilizador uti)
@@ -37,7 +33,6 @@ public class Utilizador implements Serializable {
         this.coordsU = new Ponto(uti.getCoords().getX(),uti.getCoords().getY());
         this.email = uti.getEmail();
         this.pass = uti.getPass();
-        this.nmrUtilizacoes = uti.getNmr();
     }
 
     /** Getter das coordenadas. */
@@ -52,11 +47,6 @@ public class Utilizador implements Serializable {
     public String getNickname()
     {
         return this.nickname;
-    }
-
-    public int getNmr()
-    {
-        return this.nmrUtilizacoes;
     }
 
     public String getNome() {
@@ -93,14 +83,6 @@ public class Utilizador implements Serializable {
         String textoSplit[] = nome.split(" ");
         return textoSplit[0];
     }
-
-    public void acrescentaUtilizacao()
-    {
-        this.nmrUtilizacoes ++;
-    }
-
-
-
     public Utilizador clone()
     {
         return new Utilizador(this);

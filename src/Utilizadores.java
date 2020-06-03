@@ -3,7 +3,6 @@ import java.util.*;
 public class Utilizadores {
     private Map<String, Utilizador> utilizadores;
 
-
     public Utilizadores() {
         this.utilizadores = new HashMap<>();
     }
@@ -37,30 +36,7 @@ public class Utilizadores {
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("Lista:").append(this.utilizadores);
-        return s.toString() + "\n";
+        return s.toString();
     }
-
-    public Object[] top10utilizadores() {
-
-            Map<Utilizador, Integer> mp = new HashMap<>();
-            for (String s : this.utilizadores.keySet()) {
-
-                        mp.putIfAbsent(this.utilizadores.get(s), this.utilizadores.get(s).getNmr());
-
-            }
-            Object[] a = mp.entrySet().toArray();
-            Arrays.sort(a, new Comparator() {
-                public int compare(Object o1, Object o2) {
-                    if (((Map.Entry<String,Integer>) o1).getValue()
-                            .compareTo(((Map.Entry<String,Integer>) o2).getValue()) > 0) return -1;
-                    else if (((Map.Entry<String, Integer>) o1).getValue()
-                            .compareTo(((Map.Entry<String, Integer>) o2).getValue()) < 0) return 1;
-                    else return ((Map.Entry<String, Integer>) o1).getKey()
-                                .compareTo(((Map.Entry<String, Integer>) o2).getKey());
-                }
-            });
-            return a;
-        }
-    }
-
+}
 
