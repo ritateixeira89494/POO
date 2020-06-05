@@ -3,7 +3,6 @@ public class ExisteEncomenda extends Exception{
     {
         super();
     }
-
     public ExisteEncomenda(String s)
     {
         super(s);

@@ -101,21 +101,21 @@ public class Input implements Serializable {
         return b;
     }
 
-        public static short lerShort() {
-            Scanner input = new Scanner(in);
-            boolean ok = false;
-            short s = 0;
-            while (!ok) {
-                try {
-                    s = input.nextShort();
-                    ok = true;
-                } catch (InputMismatchException e) {
-                    OutputView.print("Short Inválido");
-                    OutputView.print("Novo valor: ");
-                    input.nextLine();
-                }
+    public static short lerShort() {
+        Scanner input = new Scanner(in);
+        boolean ok = false;
+        short s = 0;
+        while (!ok) {
+            try {
+                s = input.nextShort();
+                ok = true;
+            } catch (InputMismatchException e) {
+                OutputView.print("Short Inválido");
+                OutputView.print("Novo valor: ");
+                input.nextLine();
             }
-            return s;
         }
+        return s;
+    }
 
 }
